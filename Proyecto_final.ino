@@ -97,7 +97,7 @@ char* formato_html =
   "    <style> body { background-color: #fffff; font-family: Arial, Helvetica, Sans-Serif; Color: #000000; }</style>"
   "</head>"
   "<body>"
-  "    <h2>MONITOREO CONSUMO ENERGETICO</h2>"
+  "    <h2>MONITOREO CONSUMO ENERGÉTICO</h2>"
   "    <h3>El Voltaje Actual es: %0.3f [V]</h3>"
   "    <h3>La Corriente Actual es: %0.3f [A]</h3>"
   "    <h3>La Potencia Actual es: %0.3f [W]</h3>"
