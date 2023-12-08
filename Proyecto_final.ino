@@ -43,43 +43,43 @@ struct Sensor
 } ;
 
 //Inicialización de las variables de la estructura Sensor
-Sensor DatosSensor = {0,0,0,0,0,0,0};
+Sensor InfoSensor = {0,0,0,0,0,0,0};
 
 /****************************************************************************************************
-*                                Función Medición Sensor                                            *
+*                                Función Datos Sensor                                            *
 ****************************************************************************************************/
 
-void MedicionSensor() {
-  DatosSensor.voltaje = pzem.voltage();
-  if (isnan(DatosSensor.voltaje)) { // Se validan los datos que arroja el módulo PZEM
-    DatosSensor.voltaje = -1; //se muestra -1 mientras no haya carga conectada
+void SensorData() {
+  InfoSensor.voltaje = pzem.voltage();
+  if (isnan(InfoSensor.voltaje)) { // Se validan los datos que arroja el módulo PZEM
+    InfoSensor.voltaje = -1; //se muestra -1 mientras no haya carga conectada
   }
 
-  DatosSensor.corriente = pzem.current();
-  if (isnan(DatosSensor.corriente)) { // Se validan los datos que arroja el módulo PZEM
-    DatosSensor.corriente = -1; //se muestra -1 mientras no haya carga conectada
+  InfoSensor.corriente = pzem.current();
+  if (isnan(InfoSensor.corriente)) { // Se validan los datos que arroja el módulo PZEM
+    InfoSensor.corriente = -1; //se muestra -1 mientras no haya carga conectada
   }
 
-  DatosSensor.potencia = pzem.power();
-  if (isnan(DatosSensor.potencia)) { // Se validan los datos que arroja el módulo PZEM
-    DatosSensor.potencia = -1; //se muestra -1 mientras no haya carga conectada
+  InfoSensor.potencia = pzem.power();
+  if (isnan(InfoSensor.potencia)) { // Se validan los datos que arroja el módulo PZEM
+    InfoSensor.potencia = -1; //se muestra -1 mientras no haya carga conectada
   }
 
-  DatosSensor.energia = pzem.energy();
-  if (isnan(DatosSensor.energia)) { // Se validan los datos que arroja el módulo PZEM
-    DatosSensor.energia = -1; //se muestra -1 mientras no haya carga conectada
+  InfoSensor.energia = pzem.energy();
+  if (isnan(InfoSensor.energia)) { // Se validan los datos que arroja el módulo PZEM
+    InfoSensor.energia = -1; //se muestra -1 mientras no haya carga conectada
   }
 
-  DatosSensor.frecuencia = pzem.frequency();
-  if (isnan(DatosSensor.frecuencia)) { // Se validan los datos que arroja el módulo PZEM
-    DatosSensor.frecuencia = -1; //se muestra -1 mientras no haya carga conectada
+  InfoSensor.frecuencia = pzem.frequency();
+  if (isnan(InfoSensor.frecuencia)) { // Se validan los datos que arroja el módulo PZEM
+    InfoSensor.frecuencia = -1; //se muestra -1 mientras no haya carga conectada
   }
 
-  DatosSensor.fp = pzem.pf();
-  if (isnan(DatosSensor.fp)) { // Se validan los datos que arroja el módulo PZEM
-    DatosSensor.fp = -1; //se muestra -1 mientras no haya carga conectada
+  InfoSensor.fp = pzem.pf();
+  if (isnan(InfoSensor.fp)) { // Se validan los datos que arroja el módulo PZEM
+    InfoSensor.fp = -1; //se muestra -1 mientras no haya carga conectada
   }  
-  DatosSensor.valor = (827.8074 * pzem.energy());
+  InfoSensor.valor = (827.8074 * pzem.energy());
 }
 
 
@@ -154,18 +154,18 @@ void setup() {
 
   //Se configura el Web Server
   server.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
-    MedicionSensor();
+    SensorData();
 
     //Presentación de datos en pantalla
     sprintf(buffer_html, 
     formato_html, 
-    DatosSensor.voltaje,
-    DatosSensor.corriente,
-    DatosSensor.potencia,
-    DatosSensor.energia,
-    DatosSensor.frecuencia,
-    DatosSensor.fp,
-    DatosSensor.valor);
+    InfoSensor.voltaje,
+    InfoSensor.corriente,
+    InfoSensor.potencia,
+    InfoSensor.energia,
+    InfoSensor.frecuencia,
+    InfoSensor.fp,
+    InfoSensor.valor);
 
     request->send_P(200, "text/html", buffer_html);
   });
